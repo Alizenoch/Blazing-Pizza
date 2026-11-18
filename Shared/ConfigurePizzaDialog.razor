@@ -1,0 +1,41 @@
+<div class="dialog-container">
+    <div class="dialog">
+        <div class="dialog-title">
+            <h2>@Pizza.Special.Name</h2>
+            @Pizza.Special.Description
+        </div>
+
+        <div class="dialog-body">
+            <label>Size: @Pizza.Size"</label>
+            <input type="range" min="@Pizza.MinimumSize" max="@Pizza.MaximumSize" step="1" @bind="Pizza.Size"
+                   @bind:event="oninput" />
+
+            <p>
+                Price:
+                <span class="price">
+                    @Pizza.GetFormattedTotalPrice()
+                </span>
+            </p>
+        </div>
+
+        <div class="dialog-buttons">
+            <button class="btn btn-secondary" @onclick="OnCancel">
+                Cancel
+            </button>
+            <button class="btn btn-success" @onclick="OnConfirm">
+                Add to order
+            </button>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Pizza Pizza { get; set; }
+
+    [Parameter]
+    public EventCallback OnCancel { get; set; }
+
+    [Parameter]
+    public EventCallback OnConfirm { get; set; }
+}
